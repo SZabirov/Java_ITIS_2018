@@ -2,7 +2,10 @@ package com.company;
 
 
 import java.util.Scanner;
-
+/*
+    Задача получить n чисел от пользователя
+    и вывести их в обратном порядке
+ */
 public class BackwardsNumbers {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

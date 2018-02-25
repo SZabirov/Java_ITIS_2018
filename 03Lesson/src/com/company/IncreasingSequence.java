@@ -2,7 +2,11 @@ package com.company;
 
 
 import java.util.Scanner;
-
+/*
+    Определить, возрастающая ли последовательность
+    Обратить внимание на переменную isIncreasing,
+    которая показывает, является ли последовательность возрастающей
+ */
 public class IncreasingSequence {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

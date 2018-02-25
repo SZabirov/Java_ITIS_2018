@@ -6,6 +6,9 @@ public class Main {
 
 	    int a = 7;
 	    int c = 5;
-	    boolean b = a == c;
+	    //пример переменной типа boolean
+		//b примет значение true, если a меньше c
+		//b примет значение false, если a больше либор равно c
+	    boolean b = a < c;
     }
 }
