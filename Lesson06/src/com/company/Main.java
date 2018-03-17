@@ -24,6 +24,13 @@ public class Main {
 
         System.out.println("Количество продуктов на складе:");
         printNameWithCount();
+
+//        delete(3);
+//        System.out.println("Удален 3 эл-т");
+
+//        changePrice(4, 120);
+
+        add(7, "бублики", 50, 8, "Хлебзавод 2", 5);
     }
 
     static void printNameWithCount() throws FileNotFoundException {
@@ -103,8 +110,25 @@ public class Main {
      * Удаляет полностью запись о продукте
      * @param id идентификатор продукта для удаления
      */
-    static void delete(int id) {
-
+    static void delete(int id) throws FileNotFoundException {
+        Scanner scanner = new Scanner(new FileInputStream("products.txt"));
+        int n = countOfItems();
+        String[] products = new String[n];
+        int i = 0;
+        while (scanner.hasNextLine()) {
+            String str = scanner.nextLine();
+            products[i] = str;
+            i++;
+        }
+        PrintWriter pw = new PrintWriter(new FileOutputStream("products.txt"));
+        for (int j = 0; j < n; j++) {
+            String s = products[j];
+            String[] elements = s.split(", ");
+            if (Integer.parseInt(elements[0]) != id) {
+                pw.println(s);
+            }
+        }
+        pw.close();
     }
 
     /**
@@ -112,8 +136,29 @@ public class Main {
      * @param id идентификатор продукта
      * @param price новая цена продукта
      */
-    static void changePrice(int id, int price) {
-
+    static void changePrice(int id, int price) throws FileNotFoundException {
+        Scanner scanner = new Scanner(new FileInputStream("products.txt"));
+        int n = countOfItems();
+        String[] products = new String[n];
+        int i = 0;
+        while (scanner.hasNextLine()) {
+            String str = scanner.nextLine();
+            products[i] = str;
+            i++;
+        }
+        PrintWriter pw = new PrintWriter(new FileOutputStream("products.txt"));
+        for (int j = 0; j < n; j++) {
+            String s = products[j];
+            String[] elements = s.split(", ");
+            if (Integer.parseInt(elements[0]) != id) {
+                pw.println(s);
+            } else {
+                elements[2] = String.valueOf(price);
+                s = elements[0] + ", " + elements[1] + ", " + elements[2] + ", " + elements[3];
+                pw.println(s);
+            }
+        }
+        pw.close();
     }
 
     /**
@@ -122,5 +167,11 @@ public class Main {
      */
     static int getMostExpensiveProductId() {
         return -1;
+    }
+
+    static void add (int id, String name, int price, int count, String factory, int days) throws FileNotFoundException {
+        PrintWriter pw = new PrintWriter(new FileOutputStream("products.txt", true));
+        pw.println(id + ", " + name + ", " + price + ", " + count + ", " + factory);
+        pw.close();
     }
 }
