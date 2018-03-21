@@ -9,23 +9,34 @@ import java.util.Scanner;
 public class Main {
     final static String FILENAME = "products.txt";
 
-    Product[] products = load(FILENAME);
-
-    public Main() throws FileNotFoundException {
-    }
-
-
     public static void main(String[] args) throws FileNotFoundException {
 
         Product[] products = load(FILENAME);
         printProducts(products);
+        sortByPrice(products);
+        printProducts(products);
 
-        Product product = getById(4);
-        System.out.println(product.price);
+//        Product product = getById(4);
+//        System.out.println(product.price);
+    }
+
+    /**
+     * Сортирует продукты по возрастанию их цены
+     * @param products
+     */
+    static void sortByPrice(Product[] products) {
+        for (int i = 0; i < products.length; i++) {
+            for (int j = 0; j < products.length; j++) {
+                if (products[j].price > products[j + 1].price) {
+                    //перестановка
+                }
+            }
+        }
     }
 
     /**
      * Выводит на консоль информацию о содержимом массива продуктов
+     *
      * @param products продукты, которые будут распечатаны
      */
     static void printProducts(Product[] products) {
@@ -37,12 +48,13 @@ public class Main {
 
     /**
      * Возвращает Product по его id
+     *
      * @param id идентификатор нужного продукта
      */
     static Product getById(int id) throws FileNotFoundException {
         Product[] products = load(FILENAME);
         for (int i = 0; i < products.length; i++) {
-            if (products[i].id == id){
+            if (products[i].id == id) {
                 return products[i];
             }
         }
@@ -51,11 +63,18 @@ public class Main {
 
     /**
      * Возвращает самый дорогой Product, имеющийся на складе
+     *
      * @return
      */
     static Product getMostExpensiveProduct() throws FileNotFoundException {
         Product[] products = load(FILENAME);
-        return null;
+        Product productWithMaxPrice = products[0];
+        for (int i = 1; i < products.length; i++) {
+            if (products[i].price > productWithMaxPrice.price) {
+                productWithMaxPrice = products[i];
+            }
+        }
+        return productWithMaxPrice;
     }
 
 
