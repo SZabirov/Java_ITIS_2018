@@ -9,14 +9,19 @@ import java.util.Scanner;
 public class Main {
     final static String FILENAME = "products.txt";
 
+    Product[] products = load(FILENAME);
+
+    public Main() throws FileNotFoundException {
+    }
+
+
     public static void main(String[] args) throws FileNotFoundException {
-        Product p = new Product(77, "Бублики", 21, 8);
-        Product p1 = new Product(21, "dfgsdfg", 11, 8);
-        Product[] prs = new Product[2];
-        prs[0] = p;
-        prs[1] = p1;
 
         Product[] products = load(FILENAME);
+        printProducts(products);
+
+        Product product = getById(4);
+        System.out.println(product.price);
     }
 
     /**
@@ -24,7 +29,10 @@ public class Main {
      * @param products продукты, которые будут распечатаны
      */
     static void printProducts(Product[] products) {
-
+        System.out.println("id  |   name    |   price   |   count");
+        for (int i = 0; i < products.length; i++) {
+            System.out.println(products[i].id + " | " + products[i].name + " | " + products[i].price + " | " + products[i].count);
+        }
     }
 
     /**
@@ -33,6 +41,11 @@ public class Main {
      */
     static Product getById(int id) throws FileNotFoundException {
         Product[] products = load(FILENAME);
+        for (int i = 0; i < products.length; i++) {
+            if (products[i].id == id){
+                return products[i];
+            }
+        }
         return null;
     }
 
