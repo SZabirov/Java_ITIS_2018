@@ -12,8 +12,10 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
         Product[] products = load(FILENAME);
+        System.out.println("Исходный список продуктов:");
         printProducts(products);
         sortByPrice(products);
+        System.out.println("Отсортированный список продуктов:");
         printProducts(products);
 
 //        Product product = getById(4);
@@ -26,9 +28,11 @@ public class Main {
      */
     static void sortByPrice(Product[] products) {
         for (int i = 0; i < products.length; i++) {
-            for (int j = 0; j < products.length; j++) {
-                if (products[j].price > products[j + 1].price) {
-                    //перестановка
+            for (int j = 0; j < products.length - 1; j++) {
+                if (products[j + 1].price < products[j].price) {
+                    Product product = products[j];
+                    products[j] = products[j+1];
+                    products[j+1] = product;
                 }
             }
         }
