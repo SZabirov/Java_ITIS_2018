@@ -31,10 +31,10 @@ public class Storage {
     }
 
     Product getById(int id) throws SQLException {
-        Statement statement = connection.createStatement();
-        String sqlQuery = "SELECT * FROM product WHERE id = " + id;
-        System.out.println(sqlQuery);
-        ResultSet rs = statement.executeQuery(sqlQuery);
+        String sqlQuery = "SELECT * FROM product WHERE id = ?";
+        PreparedStatement statement = connection.prepareStatement(sqlQuery);
+        statement.setInt(1, id);
+        ResultSet rs = statement.executeQuery();
         rs.next();
         String name = rs.getString("name");
         int price = rs.getInt("price");
@@ -49,6 +49,22 @@ public class Storage {
                 "' WHERE id = " + id;
         System.out.println(sqlQuery);
         statement.executeUpdate(sqlQuery);
+    }
+
+    void addProduct(Product p) throws SQLException {
+        String sqlQuery = "INSERT INTO product VALUES (?, ?, ?, ?)";
+        PreparedStatement pstmt = connection.prepareStatement(sqlQuery);
+        pstmt.setInt(1, p.id);
+        pstmt.setString(2, p.name);
+        pstmt.setInt(3, p.price);
+        pstmt.setInt(4, p.count);
+        pstmt.executeUpdate();
+
+        //так делать нельзя
+//        Statement statement = connection.createStatement();
+//        String sqlQuery = "INSERT INTO product VALUES (" + p.id + ", '" + p.name + "', " + p.price + ", " + p.count + ")";
+//        System.out.println(sqlQuery);
+//        statement.executeUpdate(sqlQuery);
     }
 }
 
