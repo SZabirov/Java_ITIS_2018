@@ -1,0 +1,40 @@
+<html>
+	<head>
+		<title>Главная страница</title>
+		<style>
+			body {
+				background-color: yellow;
+			}
+			h1 {
+				text-align: center;
+				color: blue;
+			}
+			img {
+				width: 30px;
+			}
+		</style>
+		<script>
+			function changeColor() {
+				var h = document.getElementById("mainheader");
+				h.style.color = "red";
+			}
+		</script>
+	</head>
+	<body>
+		<h1 id="mainheader">Главная страница сайта!</h1>
+		<button onclick="changeColor();">Сменить цвет</button>
+		<form>
+			<input type="text" name="username"></input>
+			<input type="submit"></input>
+		</form>
+		<h2>О чем наш сайт</h2>
+		<p>Привет всем!</p>
+		<h2>Наши товары</h2>
+		<ul>
+			<li>Ноутбуки <a href="https://www.dns-shop.ru/">DNS</a></li>
+			<li>Планшеты</li>
+			<li>Переферия</li>
+		</ul>
+		<img src="logo-social.png">
+	</body>
+</html>
