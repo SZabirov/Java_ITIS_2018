@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 public class PollController {
+    @Autowired
     PollDao pollDao;
     @Autowired
     AnswerDao answerDao;
