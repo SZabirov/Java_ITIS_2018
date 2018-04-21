@@ -2,6 +2,7 @@ package ru.itis.lesson13.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import ru.itis.lesson13.model.Answer;
 import ru.itis.lesson13.model.Poll;
@@ -14,6 +15,8 @@ public class PollDaoImpl implements PollDao {
     JdbcTemplate jdbcTemplate;
     @Autowired
     AnswerDao answerDao;
+    @Autowired
+    RowMapper<Poll> pollRowMapper;
 
     @Override
     public Poll findById(Long id) {
@@ -26,6 +29,8 @@ public class PollDaoImpl implements PollDao {
 
     @Override
     public List<Poll> findAll() {
-        return null;
+        String sqlQuery = "SELECT * FROM poll";
+        List<Poll> polls = jdbcTemplate.query(sqlQuery, pollRowMapper);
+        return polls;
     }
 }

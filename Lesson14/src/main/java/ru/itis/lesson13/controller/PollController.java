@@ -20,6 +20,11 @@ public class PollController {
     @Autowired
     AnswerDao answerDao;
 
+    @RequestMapping("/polls")
+    List<Poll> getAllPolls() {
+        return pollDao.findAll();
+    }
+
     @RequestMapping("/polls/{id}")
     Poll getPollById(@PathVariable Long id) {
         return pollDao.findById(id);
