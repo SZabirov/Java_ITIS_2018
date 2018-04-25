@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import ru.itis.lesson13.dao.AnswerDao;
-import ru.itis.lesson13.dao.PollDao;
 import ru.itis.lesson13.model.Answer;
 import ru.itis.lesson13.model.Poll;
 

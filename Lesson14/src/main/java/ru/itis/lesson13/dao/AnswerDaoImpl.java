@@ -20,4 +20,11 @@ public class AnswerDaoImpl implements AnswerDao {
         List<Answer> answers = jdbcTemplate.query(sqlQuery, arr, new AnswerRowMapper());
         return answers;
     }
+
+    @Override
+    public Answer findById(Long id) {
+        String sqlQuery = "SELECT * FROM answer WHERE id = ?";
+        Object[] arr = {id};
+        return jdbcTemplate.queryForObject(sqlQuery, arr, new AnswerRowMapper());
+    }
 }

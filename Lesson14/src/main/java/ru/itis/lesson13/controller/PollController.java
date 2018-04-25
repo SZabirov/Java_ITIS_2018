@@ -1,11 +1,11 @@
 package ru.itis.lesson13.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import ru.itis.lesson13.dao.AnswerDao;
 import ru.itis.lesson13.dao.PollDao;
 import ru.itis.lesson13.model.Answer;
@@ -13,7 +13,7 @@ import ru.itis.lesson13.model.Poll;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class PollController {
     @Autowired
     PollDao pollDao;
@@ -21,17 +21,26 @@ public class PollController {
     AnswerDao answerDao;
 
     @RequestMapping("/polls")
-    List<Poll> getAllPolls() {
-        return pollDao.findAll();
+    String getAllPolls(Model model) {
+        List<Poll> pollList = pollDao.findAll();
+        model.addAttribute("pollList", pollList);
+        return "polls";
     }
 
     @RequestMapping("/polls/{id}")
-    Poll getPollById(@PathVariable Long id) {
-        return pollDao.findById(id);
+    String getPollById(@PathVariable Long id, Model model) {
+        Poll p = pollDao.findById(id);
+        model.addAttribute("poll", p);
+        return "poll";
     }
 
     @RequestMapping("/answers")
     List<Answer> getAnswersByPollId(@RequestParam Long pollId) {
         return answerDao.getAllByPollId(pollId);
+    }
+
+    @RequestMapping("/answers/{id}")
+    Answer getAnswerById(@PathVariable Long id) {
+        return answerDao.findById(id);
     }
 }

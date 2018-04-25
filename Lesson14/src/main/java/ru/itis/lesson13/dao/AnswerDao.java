@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface AnswerDao {
     List<Answer> getAllByPollId(Long PollId);
+    Answer findById(Long id);
 }
