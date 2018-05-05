@@ -25,7 +25,9 @@ public class PollController {
 
     @PostMapping("/create")
     String create(@RequestParam String title) {
-        System.out.println("User wants to create a new poll with title = " + title);
+        Poll poll = new Poll();
+        poll.setTitle(title);
+        pollDao.save(poll);
         return "redirect:/create";
     }
 
